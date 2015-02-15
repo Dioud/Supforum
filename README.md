@@ -3,7 +3,7 @@ _____________________________
 
 It was a school project.
 
-I used Netbeans 7.4 with GlassFish 3.1.2.2
+I used Netbeans 7.4 with GlassFish 3.1.2.2, EJB 3.1, JSF 2.1
 
 You need to use this name for the ressource pool: **jdbc/rmt**
 
