@@ -1,0 +1,92 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="Manage" />
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="well"><h2>Add/Edit category</h2>
+            <div >
+                <h:form>
+                    <h:dataTable value="#{categoryController.dataModel}" var="category" class="table table-hover">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Name"/>
+                            </f:facet>
+                            ${category.name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Action"/>
+                            </f:facet>
+                            <h:commandButton class="btn btn-default" action="#{categoryController.prepareEdit()}" value="Edit"/>
+                            <h:commandButton class="btn btn-default" action="#{categoryController.remove()}" value="Delete"/>
+
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </div>
+            <div class="well">
+
+                <h:form style="  margin: 0 auto;    max-width: 330px;    padding: 15px;">
+                    <h:outputLabel for="name" value="Name :"/>
+                    <h:inputText class="form-control" id="name" required="true" value="#{categoryController.category.name}" label="Name" /><br/>
+
+                    <h:commandButton class="btn btn-default" value="Create" action="#{categoryController.create()}" />
+                    <h:commandButton class="btn btn-default" value="Edit" action="#{categoryController.edit()}" /><br/>
+                </h:form>
+            </div>
+        </div>
+
+        <div class="well">
+            <h2>Add Board</h2>
+
+            <div >
+                <h:form >
+                    <h:dataTable value="#{boardController.dataModel}" var="board" class="table table-hover">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Name"/>
+                            </f:facet>
+                            ${board.name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Category"/>
+                            </f:facet>
+                            ${board.category.name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Action"/>
+                            </f:facet>
+                            <h:commandButton class="btn btn-default" action="#{boardController.prepareEdit()}" value="Edit"/>
+                            <h:commandButton class="btn btn-default" action="#{boardController.remove()}" value="Delete"/>
+
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </div>
+
+            <div class="well">
+
+                <h:form style="  margin: 0 auto;    max-width: 330px;    padding: 15px;">
+
+                    <h:outputLabel for="name" value="Name :"/>
+                    <h:inputText class="form-control" id="name" required="true" value="#{boardController.board.name}" label="Name" /><br/>
+
+                    <h:outputLabel for="category" value="Category :"/>
+                    <h:selectOneMenu class="form-control" id="category" required="true" value="#{boardController.board.category}" converter="#{categoryConverter}" label="Category">
+                        <f:selectItems value="#{categoryController.selectItems}"/>
+                    </h:selectOneMenu> <br />                                                                  
+                    <h:commandButton class="btn btn-default" value="Create" action="#{boardController.create()}" />
+                    <h:commandButton class="btn btn-default" value="Edit" action="#{boardController.edit()}" /><br/>
+                </h:form>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

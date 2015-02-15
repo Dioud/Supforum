@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <title><ui:insert name="title" /></title>
+        <h:outputStylesheet name="css/bootstrap.min.css"/>
+        <h:outputStylesheet name="css/bootstrap-theme.min.css"/>
+    </h:head>
+
+    <h:body>
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class="active">
+                        <h:outputLink value="/forum/forum.xhtml">
+                            <h:outputText value="Index"/>
+                        </h:outputLink>
+                    </li>
+                    <li> <h:link rendered="${userController.user.username != null}" value="My Profile" outcome="/auth/profile.xhtml">
+                            <f:param name="profileid" value="#{userController.user.id}"/>
+                        </h:link></li>
+                    <li>       
+                        <h:outputLink value="/forum/auth/manage.xhtml" rendered="${userController.user.role == 'administrator'}">
+                            <h:outputText value="Manage"/>
+                        </h:outputLink>
+                    </li>
+                    <li><h:outputLink rendered="${userController.user.username == null}" value="/forum/register.xhtml">
+                            <h:outputText value="Register"/>
+                        </h:outputLink>
+                    </li>
+
+                    <li> <h:outputLink rendered="${userController.user.username == null}" value="/forum/login.xhtml">
+                            <h:outputText value="Login"/>
+                        </h:outputLink>
+                    </li>
+
+                    <li style='position: relative;display: block;padding: 10px 15px;'>  
+                        <h:form rendered="${userController.user.username != null}">
+                            <h:panelGroup id="loginout">
+
+                                <h:commandLink value="Logout" action="#{userController.logout()}" />
+                            </h:panelGroup>         
+                        </h:form>
+                    </li>
+
+                </ul>
+                <h3 class="text-muted">Supinfo</h3>
+            </div>
+
+            <div class="jumbotron" style="padding: 2px;margin-bottom: 0;">
+                <h1 style="font-size: 20px;">
+                    <ui:insert name="title">Forum</ui:insert>
+                </h1>
+
+            </div>
+
+            <div class="row marketing" style="margin-top: 0;">
+                <div class="col-lg-12">
+                    <ui:insert name="content" />
+                </div>
+            </div>
+
+
+
+            <div class="footer">
+                <p>Supinfo 2014</p>
+            </div>
+
+        </div> 
+
+
+        <ui:insert name="links" />
+
+
+    </h:body>
+</html>

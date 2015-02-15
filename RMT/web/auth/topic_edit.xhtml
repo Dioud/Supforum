@@ -1,0 +1,29 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{messageController.topic.name}" />
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="well">
+            <h:form>
+                <div style="text-align: center;"><h4>Edit Message</h4></div>
+                <div  class="form-group">
+                    <h:outputLabel value="Content: " />
+                    <h:inputTextarea class="form-control" value="#{messageController.message.content}" />
+                </div>                                                                
+                <div  class="form-group">
+                    <h:commandButton class="btn btn-default" value="Edit" action="#{messageController.edit()}" /><br/>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+
+
+
+

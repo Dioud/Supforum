@@ -1,0 +1,26 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="Profile" />
+    </ui:define>
+
+    <ui:define name="content">
+
+
+        <div class="well">
+            <h3>Username : <h:outputText value="#{profileController.user.username}" /></h3>
+            <h3>Creation date : <h:outputText value="#{profileController.user.creationDate}" /></h3>
+            <h3>Role : <h:outputText value="#{profileController.user.role}" /></h3>
+            <h3>Topic posted : <h:outputText value="#{profileController.countalltopic}" /></h3>
+
+            <h:link rendered="${userController.user.role == 'administrator'}" value="Edit" outcome="/auth/profile_edit.xhtml">
+                <f:param name="profileid" value="#{profileController.user.id}"/>
+            </h:link>
+
+        </div>
+    </ui:define>
+</ui:composition>

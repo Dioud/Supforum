@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="Forum" />
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <h:dataTable value="#{boardController.dataModel}" var="board" class="table table-bordered" style="text-align: center;">
+                <h:column headerClass="col2">
+                    <f:facet name="header">
+                        <h:outputText value="Category"/>
+                    </f:facet>
+                    ${board.category.name}
+                </h:column>
+                <h:column headerClass="col3" >
+                    <f:facet name="header" >
+                        <h:outputText value="Board"/>
+                    </f:facet>
+                    <h:link value="#{board.name}" outcome="/auth/board.xhtml" style='font-size: 30px;'>
+                        <f:param name="boardid" value="#{board.id}"/>
+                    </h:link>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+        <div class="well">
+            <ul class="list-unstyled">
+                <li>Total Messages : <h:outputText value="#{messageController.countall}"/></li>
+                <li>Total Topics : <h:outputText value="#{topicController.countall}"/></li>
+                <li>Total Users : <h:outputText value="#{profileController.countall}"/></li>
+                <li>Creation Date : <h:outputText value="06/04/2014"/></li>
+            </ul>
+        </div>
+    </ui:define>
+</ui:composition>

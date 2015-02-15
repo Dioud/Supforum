@@ -1,0 +1,71 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="#{topicController.board.name}" />
+    </ui:define>
+
+    <ui:define name="content">
+
+
+        <div >
+            <h:form>
+                <h:dataTable value="#{topicController.dataModel}" var="topic" class="table table-striped">           
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Topic"/>
+                        </f:facet>
+                        <h:link value="${topic.name}" outcome="/auth/topic.xhtml">
+                            <f:param name="topicid" value="#{topic.id}"/>
+                        </h:link>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Date"/>
+                        </f:facet>
+                        <h:outputText value=" ${topic.creationDate}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Author"/>
+                        </f:facet>
+                        <h:link value="#{topic.user.username}" outcome="/auth/profile.xhtml">
+                    <f:param name="profileid" value="#{topic.user.id}"/>
+                </h:link>
+                        
+                    </h:column>
+                    <h:column rendered="${userController.user.role != 'user'}">
+                        <f:facet name="header">
+                            <h:outputText value="Action"/>
+                        </f:facet>
+                        <button type="button" class="btn btn-default"> <h:link value="edit" outcome="/auth/board_edit.xhtml">
+                                <f:param name="topicid" value="#{topic.id}"/>
+                            </h:link></button>
+                        <h:commandButton class="form-control btn-xs" action="${topicController.remove()}" value="Delete"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </div>
+        <div class="well">
+            <div class="" style="text-align: center;"><h4>New Topic</h4></div>
+            <h:form>
+                <div  class="form-group">
+                    <h:outputLabel for="name" value="Name :"/>
+                    <h:inputText id="name" class="form-control" required="true" value="#{topicController.topic.name}" label="Name" /><br/>
+
+                </div>
+                <div  class="form-group">
+                    <h:outputLabel value="Content: " />
+                    <h:inputTextarea class="form-control" value="#{topicController.topic.content}" />
+                </div>   
+
+                <h:commandButton class="btn btn-default" value="Create" action="#{topicController.create()}" />
+
+
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,32 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/template.xhtml">
+
+    <ui:define name="title">
+        <h:outputText value="Register" />
+    </ui:define>
+    
+  <ui:define name="content">
+
+        <div class="well">
+
+            <h:form style="  margin: 0 auto;    max-width: 330px;    padding: 15px;">
+                <div  class="form-group">
+                    <h:outputLabel for="username" value="Username :"/>
+                    <h:inputText class="form-control" id="username" value="#{userController.user.username}" label="Username" />
+                </div>
+                <div  class="form-group">
+                    <h:outputLabel for="password" value="Password :"/>
+                    <h:inputSecret class="form-control" id="password" value="#{userController.user.password}" label="Password" />
+                </div>
+                <div  class="form-group">
+                    <h:commandButton class="btn btn-default" value="Register" action="#{userController.create()}" />
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+
+
